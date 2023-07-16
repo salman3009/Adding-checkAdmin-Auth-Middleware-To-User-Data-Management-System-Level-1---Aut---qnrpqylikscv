@@ -17,7 +17,7 @@ router.get("/:id", getUserByID);
 router.post("/", checkAdmin, createUser);
 
 // Add the checkAdmin middleware to the routes below
-router.patch("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.patch("/:id",checkAdmin, updateUser);
+router.delete("/:id",checkAdmin, deleteUser);
 
 module.exports = router;
