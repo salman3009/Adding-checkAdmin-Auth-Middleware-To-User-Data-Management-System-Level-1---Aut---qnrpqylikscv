@@ -11,16 +11,16 @@ Possible Cases:
 3. User is not an admin : { message: 'Authorization failed: User is not an admin.', status: "Error" }
 */
 function checkAdmin(req, res, next) {
+  const token = req.headers.auhorization;
+  if(!token){
+    return res.status(401).json({
+     message:'Authentication failed: Missing token.',
+     status:'Error'
+    })
+  }
   try {
-     const token = req.headers.auhorization;
-     if(!token){
-       return res.status(401).json({
-        message:'Authentication failed: Missing token.',
-        status:'Error'
-       })
-     }
      const decodedToken = jwt.verify(token,JWT_SECRET);
-     if(decodedToken.role!=='admin'){
+     if(decodedToken.role!== 'admin'){
         return res.status(403).json({message:'Authorization failed: User is not an admin.',status:'Error'})
      }
      next();
