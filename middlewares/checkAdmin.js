@@ -11,7 +11,7 @@ Possible Cases:
 3. User is not an admin : { message: 'Authorization failed: User is not an admin.', status: "Error" }
 */
 function checkAdmin(req, res, next) {
-  const token = req.headers.Authorization;
+  const token = req.headers.authorization;
   if(!token){
     return res.status(401).json({
      message:'Authentication failed: Missing token.',
